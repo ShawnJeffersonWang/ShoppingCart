@@ -117,13 +117,15 @@ class UIData {
     // 为什么正确的感觉是越写越快， 因为前期编写代码的过程中已经创建了大量的基础设施
     // 购物车中有没有东西
     hasGoodsInCar() {
-        return this.getTotalChooseNumber > 0;
+        // bug 之前直接return this.getTotalChooseNumber
+        return this.getTotalChooseNumber() > 0;
     }
 
     // 长点无所谓，函数名即注释
     // 是否跨过了配送标准
     isCrossDeliveryThreshold() {
-        return this.getTotalPrice >= this.deliveryThreshold;
+        // bug 之前直接return this.getTotalPrice
+        return this.getTotalPrice() >= this.deliveryThreshold;
     }
 
     isChoose(index) {
@@ -314,8 +316,9 @@ class UI {
         // 设置结束位置，然后加个过渡效果就完事了
         // 又改动了cssom树, 执行完JS后主线程才会渲染
         // div.style.transform = `translate(${this.jumpTarget.x}px, ${this.jumpTarget.y}px)`;
-        div.style.transform = `translate(${this.jumpTarget.x}px)`;
-        i.style.transform = `translate(${this.jumpTarget.y}px)`;
+        // bug 这里没有加X和Y
+        div.style.transform = `translateX(${this.jumpTarget.x}px)`;
+        i.style.transform = `translateY(${this.jumpTarget.y}px)`;
 
         // 先用个变量保存this,后面的函数里this会用不了
         var that = this;
