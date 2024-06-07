@@ -16,7 +16,7 @@ var aGoods = {
 // ES6
 class UIGoods {
 
-    // ES6 syntatic sugar语法糖
+    // ES6 syntactic sugar语法糖
     get totalPrice() {
         return this.choose * this.data.price;
     }
